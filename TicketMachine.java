@@ -55,8 +55,7 @@ public class TicketMachine
             balance = balance + amount;
         }
         else {
-            System.out.println("Use a positive amount rather than: " +
-                               amount);
+            System.out.println("ERROR. Introduzca un valor superior a 0");
         }
     }
 
@@ -98,5 +97,13 @@ public class TicketMachine
         amountToRefund = balance;
         balance = 0;
         return amountToRefund;
+    }
+    
+    public int emptyMachine()
+    {
+        int vaciarMaquina;
+        vaciarMaquina = balance;
+        balance = 0;
+        return total;
     }
 }
