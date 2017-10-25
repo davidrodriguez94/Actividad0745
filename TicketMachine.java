@@ -102,8 +102,14 @@ public class TicketMachine
     public int emptyMachine()
     {
         int vaciarMaquina;
-        vaciarMaquina = balance;
-        balance = 0;
-        return total;
+        if(balance == 0){
+            vaciarMaquina = balance;
+            balance = 0;
+        }
+        else{
+            System.out.println("La máquina está siendo usada en este momento. Espere a que la operación finalice");
+            vaciarMaquina = -1;
+        }
+        return vaciarMaquina;
     }
 }
