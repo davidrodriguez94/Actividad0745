@@ -17,14 +17,17 @@ public class TicketMachine
     private int balance;
     // The total amount of money collected by this machine.
     private int total;
-    
+    // El limite de billetes a la venta
+    private int limite;
+    // Posibilidad de premio
     private boolean premio;
     /**
      * Create a machine that issues tickets of the given price.
      */
-    public TicketMachine(int cost, boolean ticketPremio)
+    public TicketMachine(int cost, boolean ticketPremio, int limiteBillete)
     {
         premio = ticketPremio;
+        limite = limiteBillete;
         price = cost;
         balance = 0;
         total = 0;
@@ -50,11 +53,15 @@ public class TicketMachine
     /**
      * Receive an amount of money from a customer.
      * Check that the amount is sensible.
+     * Si se ha superado el límite de billetes, no deja meter más dinero
      */
     public void insertMoney(int amount)
     {
-        if(amount > 0) {
+        if(amount > 0 & limite > 0) {
             balance = balance + amount;
+        }
+        else if(amount > 0 & limite == 0){
+            System.out.println("ERROR. NO HAY BILLETES");
         }
         else {
             System.out.println("ERROR. Introduzca un valor superior a 0");
@@ -87,7 +94,7 @@ public class TicketMachine
             total = total + price;
             // Reduce the balance by the prince.
             balance = balance - price;
-
+            limite = limite -1;
         }
         else if(balance >= price & premio == false){
             System.out.println("##################");
@@ -101,6 +108,7 @@ public class TicketMachine
             total = total + price;
             // Reduce the balance by the prince.
             balance = balance - price;
+            limite = limite -1;
         }
         else {
             System.out.println("You must insert at least: " +
